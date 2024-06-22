@@ -6,7 +6,7 @@ id_vehiculo = 2
 id_cliente = 1 
 tipo_tran = 'Compra'
 
-# Primero leo y serializo el JSON
+# PRIMERO LEO Y SERIALIZO EL JSON
 try:
   with open('transacciones.json', 'r', encoding='utf-8') as actual_json:
     lista_transacciones = json.load(actual_json)
@@ -66,11 +66,14 @@ def generar_nueva_transaccion(id_vehiculo, id_cliente, tipo_tran ):
   nueva_transaccion['observaciones'] = generar_observacion(tipo_tran)
   return nueva_transaccion
   
-def agregar_transaccion_json(lista_transacciones):
-  with open('transacciones.json', 'w', encoding='utf-8') as json_file:
+def agregar_transaccion_json(ruta_trans, lista_transacciones):
+  with open(ruta_trans, 'w', encoding='utf-8') as json_file:
     lista_transacciones.append(generar_nueva_transaccion(id_vehiculo, id_cliente, tipo_tran))
     json.dump(lista_transacciones, json_file, ensure_ascii=False, indent=4)
     
+
+ruta_transacciones = 'transacciones.json'
+    
   
-agregar_transaccion_json(lista_transacciones)
+agregar_transaccion_json(ruta_transacciones, lista_transacciones)
   
